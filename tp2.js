@@ -1,47 +1,4 @@
-class Usuario {
-    constructor (nombre,apellido, libros, mascotas){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.libros = libros;
-        this.mascotas = mascotas;
-    }
-    // imprimo  el nimbre y apellido del usuario
-    getFullName(){ console.log (`Nombre completo:  ${this.nombre} ${this.apellido}`) };
-
-    // le agrego al final del array una nueva mascota
-    addMascotas = (newPet) => { this.mascotas.push(newPet)};
-
-    //Muestro la cantidad de mascotas que tiene el usuario
-    countMascotas(){console.log(` ${this.nombre} ${this.apellido}, tiene ${this.mascotas.length}  mascotas`)};
-    
-    //Agrego un libro al array
-    addBook = (book) => {this.libros.push(book) };
-    
-    //genero un nuevo array solo con los titulos de los libros y los printeo
-    getBookNames(){
-        
-        const nBooks = this.libros.map((titulo) =>  titulo.nombre)
-         console.log(nBooks)
-             
-         
-    };
-}
-
-//creo mi array
-const usr = new Usuario("Sebastian","Devich",[{nombre : "El principito", autor : "Antoine de Saint-Exupéry" },{nombre : "Miguel de Cervantes", autor : "Autor 2"}], ["perro", "gato"]);
-
-
-
-usr.addBook({nombre : "No queria pensar", autor : "yo"});
-console.log(usr);
-usr.getFullName();
-usr.addMascotas("cabra");
-console.log(usr);
-usr.countMascotas();
-usr.getBookNames();
-
-
-
+const { clear } = require('console');
 const {promises: fs} = require('fs');
 
 
@@ -56,7 +13,7 @@ class Contendor{
     async save(obj){
         let data = null;
         let id= 0;
-        let dataObj = null;
+        let dataObj = [];
         
         try{
             data = await fs.readFile('./Productos.txt','utf-8')
@@ -65,25 +22,29 @@ class Contendor{
             console.log(err)
         }
         if(data.length == 0){
-            
-            data = [{...obj,id}]
             id = 1;
+            data = [{...obj,id: id}]
+            
+            
         }else{
             dataObj = JSON.parse(data);
             
-            id = dataObj.length +1;
+            id  = dataObj[dataObj.length-1].id+1;
            
             
         }
         const nObj = {id: id, ...usr};
         dataObj.push(nObj);
+        
+        
         fs.writeFile('./Productos.txt',JSON.stringify(dataObj));
         console.log("se asigno el ID:"+id)
+        
     }
     async getById(id){
         let data = null;
+        let dataObj;
         
-        let dataObj = null;
        
         try{
             data = await fs.readFile('./Productos.txt','utf-8')
@@ -101,7 +62,7 @@ class Contendor{
     async deleteById(id){
         let data = null;
         
-        let dataObj = null;
+        let dataObj= null
        
         try{
             data = await fs.readFile('./Productos.txt','utf-8')
@@ -116,7 +77,7 @@ class Contendor{
     async getAll(){
         let data = null;
         
-        let dataObj = null;
+        let dataObj = [];
        
         try{
             data = await fs.readFile('./Productos.txt','utf-8')
@@ -132,6 +93,27 @@ class Contendor{
     }
 }
 
-const usr = new Contendor( "Ariel",  'Sotelo')
 
-usr.save(usr)
+const usr = new Contendor( "flor",  'devich')
+
+
+function ejecutar(){
+    setTimeout(()=>{
+        usr.save(usr);
+        } ,1000);
+     setTimeout(()=>{
+        usr.getById(3);
+        } ,2000);
+    setTimeout(()=>{
+        usr.getAll();
+        } ,3000);
+    setTimeout(()=>{
+        usr.deleteById(3);
+        } ,4000);
+    setTimeout(()=>{
+        usr.deleteAll();
+        } ,5000);    
+}
+
+
+ejecutar()
