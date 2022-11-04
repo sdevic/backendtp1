@@ -1,6 +1,7 @@
 const { clear } = require('console');
 const {promises: fs} = require('fs');
 
+const pathFile = "Productos.txt"
 
 class Contendor{
     constructor (nombre, apellido){
@@ -16,7 +17,7 @@ class Contendor{
         let dataObj = [];
         
         try{
-            data = await fs.readFile('./Productos.txt','utf-8')
+            data = await fs.readFile(pathFile,'utf-8')
             
         }catch(err){
             console.log(err)
@@ -33,7 +34,7 @@ class Contendor{
            
             
         }
-        const nObj = {id: id, ...usr};
+        const nObj = {id: id, ...obj};
         dataObj.push(nObj);
         
         
@@ -47,7 +48,7 @@ class Contendor{
         
        
         try{
-            data = await fs.readFile('./Productos.txt','utf-8')
+            data = await fs.readFile(pathFile,'utf-8')
             dataObj = JSON.parse(data);
         }catch(err){
             console.log(err)
@@ -65,13 +66,13 @@ class Contendor{
         let dataObj= null
        
         try{
-            data = await fs.readFile('./Productos.txt','utf-8')
+            data = await fs.readFile(pathFile,'utf-8')
             dataObj = JSON.parse(data);
         }catch(err){
             console.log(err)
         }
         const uno = dataObj.filter(usuario => usuario.id !== id);
-        fs.writeFile('./Productos.txt',JSON.stringify(uno));
+        fs.writeFile(pathFile,JSON.stringify(uno));
         console.log("Se elimino el  objeto Numero:"+id)
     }
     async getAll(){
@@ -80,16 +81,16 @@ class Contendor{
         let dataObj = [];
        
         try{
-            data = await fs.readFile('./Productos.txt','utf-8')
+            data = await fs.readFile(pathFile,'utf-8')
             dataObj = JSON.parse(data);
         }catch(err){
-            console.log(err)
+            return dataObj;
         }
         console.log(dataObj)
     }
     async deleteAll(){
        
-        fs.writeFile('./Productos.txt',"");
+        fs.writeFile(pathFile,"");
     }
 }
 
