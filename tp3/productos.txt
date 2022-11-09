@@ -14,7 +14,7 @@
  {
     "title":"Globo Terraqueo",
     "price":345.67,
-    "thumbnail" : "https://tiendup.b-cdn.net/business/48/products/pAvEOW_5afc639675120_large.png",
+    "thumbnail" : "",
     "id":3
-}
+},
 ]

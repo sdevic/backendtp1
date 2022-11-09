@@ -5,16 +5,17 @@ const Contendor =require('../tp2')
 const app = expres ()
 
 
-
+const productos = new Contendor('./productos.txt');
 
 app.get('/productos',async(req, res)=>{
-  const productos = new Contendor('./tp3/productos.txt');
+ 
     let prods = await productos.getAll();//traigo todos los productos
-    res.send( prods).join('')
+    console.log(prods)
+    res.send( prods)
 })
   
   app.get('/productoRandom',async(req, res)=>{
-    const productos = new Contendor('./tp3/productos.txt');
+   
     let prods = await productos.getAll();//traigo todos los productos
     let elProducto = Math.floor(Math.random()*prods.length);//guardo la posicion del producto aleatoriamente
     res.send( prods[elProducto])
