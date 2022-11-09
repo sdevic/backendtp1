@@ -5,7 +5,7 @@ const Contendor =require('../tp2')
 const app = expres ()
 
 
-const productos = new Contendor('./productos.txt');
+const productos = new Contendor('./tp3/productos.txt');
 
 app.get('/productos',async(req, res)=>{
  
