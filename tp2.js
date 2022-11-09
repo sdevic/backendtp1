@@ -98,23 +98,7 @@ class Contendor{
 const usr = new Contendor( "flor",  'devich')
 
 
-function ejecutar(){
-    setTimeout(()=>{
-        usr.save(usr);
-        } ,1000);
-     setTimeout(()=>{
-        usr.getById(3);
-        } ,2000);
-    setTimeout(()=>{
-        usr.getAll();
-        } ,3000);
-    setTimeout(()=>{
-        usr.deleteById(3);
-        } ,4000);
-    setTimeout(()=>{
-        usr.deleteAll();
-        } ,5000);    
-}
 
 
-ejecutar()
+
+
