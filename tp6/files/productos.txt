@@ -1,0 +1,20 @@
+[
+ {
+    "title":"Escuadra",
+    "price":125.45,
+    "thumbnail" : "https://http2.mlstatic.com/D_NQ_NP_949007-MLA46367102511_062021-O.webp",
+    "id":1
+},
+ {
+    "title":"Calculadora",
+    "price":234.36,
+    "thumbnail" : "https://macoser.vteximg.com.br/arquivos/ids/156486-550-550/FX-82LAPLUS2-PK.jpg?v=637381310195230000",
+    "id":2
+},
+ {
+    "title":"Globo Terraqueo",
+    "price":345.67,
+    "thumbnail" : "",
+    "id":3
+}
+]
