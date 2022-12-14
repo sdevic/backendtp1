@@ -1,7 +1,8 @@
+
 const sqlliteOptions = {
     client: 'sqlite3',
     connection: {
-        filename: './db/ecommerce.sqlite'
+        filename: './tp7/db/ecommerce.sqlite'
     }
 }
 

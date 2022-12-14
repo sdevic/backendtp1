@@ -9,16 +9,24 @@ const path =  require('path');
 const Contenedor = require('./managers/Contenedor');
 const ContenedorChat = require('./managers/ContenedorChat')
 
-let container = new Contenedor('productos', options);
-let chatContainer = new ContenedorChat('chat', sqlliteOptions);
+
+const container = new Contenedor('productos', options)
+const chatContainer = new ContenedorChat('chat', sqlliteOptions)
+;
 
 const viewsFolder = path.join(__dirname,"views");
 
 const app = express();
 
-const PORT = process.env.PORT || 8080;
+container.crearTabla()
+    .then(() => {
+    chatContainer.crearTabla()
+    .then(() => console.log('Tablas creadas'))
+})
 
-const server = app.listen(PORT, ()=>console.log(`Server Port ${PORT}`));
+const PORT = 8000;
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -29,15 +37,13 @@ app.engine("handlebars", handlebars.engine());
 app.set("views", viewsFolder);
 
 app.set("view engine", "handlebars");
-
+const server = app.listen(PORT, ()=>console.log(`Server Port ${PORT}`));
 //Websocket
 
 //Config websocket
 const io = new Server(server);
 
-container.crearTabla().then(() => {
-    chatContainer.crearTabla().then(() => console.log('Tablas creadas'))
-})
+
 //Detectar cada socket de un cliente que se conecte
 io.on("connection", async(socket)=>{
     console.log("Nuevo cliente conectado");

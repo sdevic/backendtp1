@@ -11,9 +11,9 @@ class Contenedor {
             .finally(() => {
                 return this.knex.schema.createTable(this.name, table => {
                     table.increments('id').primary()
-                    table.string('producto', 50).notNullable()
+                    table.string('title', 50).notNullable()
                     table.string('thumbnail', 250).notNullable()
-                    table.float('precio')
+                    table.float('price')
                 })
             })
     }

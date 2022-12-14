@@ -12,9 +12,9 @@ class ContenedorChat {
             .finally(() => {
                 return this.knex.schema.createTable(this.name, table => {
                     table.increments('id').primary()
-                    table.string('user', 50).notNullable()
+                    table.string('author', 50).notNullable()
                     table.string('text', 250).notNullable()
-                    table.string('fecha',250).notNullable();
+                    table.string('date',250).notNullable();
                 })
             })
     }
